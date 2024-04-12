@@ -1,1 +1,16 @@
+local player = game.Players.LocalPlayer 
 
+local function configureCharacter(character)
+    local OrgaoGenital = player:WaitForChild("Backpack")
+    local BucetaF = OrgaoGenital:WaitForChild("AKM")
+    local configuration = BucetaF:WaitForChild("Configuration")
+    configuration.RecoilMax.Value = 0.1
+    configuration.RecoilMin.Value = 0
+    configuration.ShotCooldown.Value = 0
+end
+
+player.CharacterAdded:Connect(configureCharacter)
+
+if player.Character then
+    configureCharacter(player.Character)
+end
