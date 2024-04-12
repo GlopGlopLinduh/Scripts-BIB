@@ -1,11 +1,16 @@
-local _ = {string.char(103, 97, 109, 101), string.char(80, 108, 97, 121, 101, 114, 115), string.char(76, 111, 99, 97, 108, 80, 108, 97, 121, 101, 114), string.char(66, 97, 99, 107, 112, 97, 99, 107), string.char(65, 75, 77), string.char(67, 111, 110, 102, 105, 103, 117, 114, 97, 116, 105, 111, 110), string.char(82, 101, 99, 111, 105, 108, 77, 97, 120), string.char(86, 97, 108, 117, 101), string.char(82, 101, 99, 111, 105, 108, 77, 105, 110), string.char(83, 104, 111, 116, 67, 111, 111, 108, 100, 111, 119, 110), string.char(119, 97, 105, 116)}
-while true do
-    local a = _G[_[1]][_[2]][_[3]] 
-    local b = a[_[4]]
-    local c = b[_[5]]
-    local d = c[_[6]]
-    d[_[7]][_[8]] = 0.1
-    d[_[9]][_[8]] = 0
-    d[_[10]][_[8]] = 0
-    _G[_[11]](5)
+local player = game.Players.LocalPlayer 
+
+local function configureCharacter(character)
+    local OrgaoGenital = player:WaitForChild("Backpack")
+    local BucetaF = OrgaoGenital:WaitForChild("AKM")
+    local configuration = BucetaF:WaitForChild("Configuration")
+    configuration.RecoilMax.Value = 0.1
+    configuration.RecoilMin.Value = 0
+    configuration.ShotCooldown.Value = 0
+end
+
+player.CharacterAdded:Connect(configureCharacter)
+
+if player.Character then
+    configureCharacter(player.Character)
 end
