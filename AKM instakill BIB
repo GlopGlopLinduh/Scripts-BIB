@@ -1,16 +1,996 @@
-local player = game.Players.LocalPlayer 
+local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
+local Window = ArrayField:CreateWindow({
+    Name = "BIB Hub",
+    LoadingTitle = "BIB hub Interface",
+    LoadingSubtitle = "By Cheese/aleatoriorandolasco",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "ArrayField"
+    },
+    Discord = {
+       Enabled = true,
+       Invite = "https://discord.gg/5Sh7aTjD", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "BIB Hub Key",
+       Subtitle = "Key System",
+       Note = "Discord link: https://discord.gg/5Sh7aTjD",
+       FileName = "Key", -- It is recommended to use something unique as other scripts using ArrayField may overwrite your key file
+       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+       Actions = {
+             [1] = {
+                 Text = 'Click here to copy the key link <--',
+                 OnPress = function()
+                     print('Pressed')
+                 end,
+                 }
+             },
+       Key = {"https://pastebin.com/raw/xr1UzENB"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+ })
 
-local function configureCharacter(character)
-    local OrgaoGenital = player:WaitForChild("Backpack")
-    local BucetaF = OrgaoGenital:WaitForChild("AKM")
-    local configuration = BucetaF:WaitForChild("Configuration")
-    configuration.RecoilMax.Value = 0.1
-    configuration.RecoilMin.Value = 0
-    configuration.ShotCooldown.Value = 0
+ ArrayField:Notify({
+    Title = "Seja Bem vindo",
+    Content = "Esse é o melhor e unico HUB pro BIB com essas funções",
+    Duration = 5.5,
+    Image = 4483362458,
+    Actions = { -- Notification Buttons
+       Ignore = {
+          Name = "Okay!",
+          Callback = function()
+          print("The user tapped Okay!")
+       end
+    },
+  },
+ })
+
+local Tab = Window:CreateTab("Scripts BIB", 4483362458) -- Title, Image
+
+local TeleporteBIB = Tab:CreateSection("BIB Teleporte BasesFac/Spawns")
+local ComprarItens = Tab:CreateSection("BIB ComprarItens")
+local Pvp = Tab:CreateSection("BIB Pvp")
+local Farm = Tab:CreateSection("BIB Farm")
+local Car = Tab:CreateSection("BIB Carros")
+
+local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "HitBox BIB",
+    Interact = 'Click',
+    Callback = function()
+  -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        function getplrsname()
+        for i,v in pairs(game:GetChildren()) do
+        if v.ClassName == "Players" then
+        return v.Name
+        end
+        end
+        end
+        local players = getplrsname()
+        local plr = game[players].LocalPlayer
+        
+        while wait(1) do
+        coroutine.resume(coroutine.create(function()
+        for _,v in pairs(game[players]:GetPlayers()) do
+        if v.Name ~= plr.Name and v.Character then
+        v.Character.LeftUpperLeg.CanCollide = false
+        v.Character.LeftUpperLeg.Color = Color3.fromRGB(0,255,0)
+        v.Character.LeftUpperLeg.Material = "Neon"
+        v.Character.LeftUpperLeg.Transparency = 0.5 -- torna a LeftUpperLeg um pouco invisível
+        v.Character.LeftUpperLeg.Size = Vector3.new(4.6,4.6,4.6) --this is the max
+        
+        v.Character.LeftLowerLeg.CanCollide = false
+        v.Character.LeftLowerLeg.Color = Color3.fromRGB(0,255,0)
+        v.Character.LeftLowerLeg.Material = "Neon"
+        v.Character.LeftLowerLeg.Transparency = 0.5 -- torna a LeftLowerLeg um pouco invisível
+        v.Character.LeftLowerLeg.Size = Vector3.new(4.6,4.6,4.6) --this is the max
+        
+        v.Character.RightUpperLeg.CanCollide = false
+        v.Character.RightUpperLeg.Color = Color3.fromRGB(0,255,0)
+        v.Character.RightUpperLeg.Material = "Neon"
+        v.Character.RightUpperLeg.Transparency = 0.5 -- torna a RightUpperLeg um pouco invisível
+        v.Character.RightUpperLeg.Size = Vector3.new(4.6,4.6,4.6) --this is the max
+        
+        v.Character.RightLowerLeg.CanCollide = false
+        v.Character.RightLowerLeg.Color = Color3.fromRGB(0,255,0)
+        v.Character.RightLowerLeg.Material = "Neon"
+        v.Character.RightLowerLeg.Transparency = 0.5 -- torna a RightLowerLeg um pouco invisível
+        v.Character.RightLowerLeg.Size = Vector3.new(4.6,4.6,4.6) --this is the max
+        end
+        end
+        end))
+        end
+        end,
+    })
+
+local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "Bala Infinita",
+    Interact = 'Click',
+    Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local old; old = hookmetamethod(game, "__index", function(this, index)
+            if not checkcaller() and tostring(this) == "CurrentAmmo" and index == "Value" then
+                return 2
+            end
+           
+            return old(this, index)
+          end)
+        end,
+    })
+
+local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil AKM Legit",
+    Interact = 'Click',
+    Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("AKM")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.120
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil AKM Try-hard",
+    Interact = 'Click',
+    Callback = function()
+  -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("AKM")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.0
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil FAL Legit",
+    Interact = 'Click',
+    Callback = function()
+  -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("FAL")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.120
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil FAL Try-hard",
+    Interact = 'Click',
+    Callback = function()
+  -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("FAL")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.0
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil HK Legit",
+    Interact = 'Click',
+    Callback = function()
+ -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("HK416")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.120
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Pvp,
+    Name = "No-recoil HK Try-hard",
+    Interact = 'Click',
+    Callback = function()
+  -- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+        local player = game.Players.LocalPlayer 
+
+        local function configureCharacter(character)
+            local OrgaoGenital = player:WaitForChild("Backpack")
+            local BucetaF = OrgaoGenital:WaitForChild("HK416")
+            local configuration = BucetaF:WaitForChild("Configuration")
+            configuration.RecoilMax.Value = 0.1
+            configuration.RecoilMin.Value = 0
+            configuration.ShotCooldown.Value = 0.0
+        end
+        
+        player.CharacterAdded:Connect(configureCharacter)
+        
+        if player.Character then
+            configureCharacter(player.Character)
+        end
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = Farm,
+    Name = "Reviver All",
+    Interact = 'Click',
+    Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+local algumJogadorMorto = false
+
+for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
+    if plr:FindFirstChild("Reviver") and plr.Reviver:FindFirstChild("Morto") and plr.Reviver.Morto.Value == true then
+        local args = {
+            [1] = plr.Name
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("SistemaReviver"):WaitForChild("Reanimando"):FireServer(unpack(args))
+        plr.Reviver.Morto.Value = false
+        algumJogadorMorto = true
+    end
 end
 
-player.CharacterAdded:Connect(configureCharacter)
-
-if player.Character then
-    configureCharacter(player.Character)
+if algumJogadorMorto then
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Sistema de Reviver";
+        Text = "O processo de reanimação foi iniciado.";
+        Duration = 5;
+    })
+else
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Sistema de Reviver";
+        Text = "Nenhum jogador morto foi encontrado.";
+        Duration = 5;
+    })
 end
+end,
+})
+
+-- Criação da caixa de texto
+local Input = Tab:CreateInput({
+    SectionParent = Farm,
+    Name = "Reviver Plr Expecifico",
+    PlaceholderText = "Nick",
+    NumbersOnly = false, -- O usuário pode digitar letras também, pois é um nome de usuário
+    CharacterLimit = 150,
+    OnEnter = true,
+    RemoveTextAfterFocusLost = false,
+    Callback = function(Text)
+-- Verifica se o jogador está morto
+local player = game.Players:FindFirstChild(Text)
+if player and player:FindFirstChild("Reviver") and player.Reviver:FindFirstChild("Morto") then
+    if player.Reviver.Morto.Value == true then
+        -- Se o jogador estiver morto, envia uma notificação
+        game:GetService("ReplicatedStorage"):WaitForChild("SistemaReviver"):WaitForChild("Reanimando"):FireServer(Text)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Sistema de Reanimação";
+            Text = "Sistema de reanimação foi iniciado para o jogador " .. Text;
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Sistema de Reanimação";
+            Text = "O sistema de reanimação não pode ser iniciado pois o jogador " .. Text .. " está vivo.";
+        })
+    end
+else
+    print("Não foi possível encontrar o jogador " .. Text)
+end
+    end,
+})
+
+
+local Toggle
+
+Toggle = Tab:CreateToggle({
+    SectionParent = Farm,
+    Name = "Reviver All Farm",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+
+while Toggle and Toggle.CurrentValue do
+    -- Obtém o serviço Players
+    local Players = game:GetService("Players")
+
+    -- Itera sobre todos os jogadores no servidor
+    for i, player in ipairs(Players:GetPlayers()) do
+        -- Verifica se o jogador tem um valor chamado 'Morto' dentro de 'Reviver'
+        local reviver = player:FindFirstChild('Reviver')
+        if reviver then
+            local mortoValue = reviver:FindFirstChild('Morto')
+            if mortoValue then
+                -- Verifica se o valor de 'Morto' é true
+                if mortoValue.Value == true then
+                    -- Define os argumentos para o sistema de reviver
+                    local args = {
+                        [1] = player.Name
+                    }
+                    -- Chama o sistema de reviver para o jogador
+                    game:GetService("ReplicatedStorage"):WaitForChild("SistemaReviver"):WaitForChild("Reanimando"):FireServer(unpack(args))
+                end
+            end
+        end
+    end
+    wait(3) -- Adiciona um atraso para evitar um loop infinito rápido
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = Car,
+   Name = "Roubar carro (Se o dono sair do jogo o carro some)",
+   Interact = 'Click',
+   Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+    local carrosSpawnados = game.Workspace.CarrosSpawnados
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    local character = player.Character
+    
+    if character then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local carroMaisProximo
+            local menorDistancia = 45 -- Definindo a distância máxima para 45 blocos
+    
+            for _, carro in pairs(carrosSpawnados:GetChildren()) do
+                if carro:FindFirstChild("DriveSeat") then
+                    local distancia = (carro.DriveSeat.Position - humanoidRootPart.Position).Magnitude
+                    if distancia < menorDistancia then
+                        -- Verifica se o DriveSeat está desocupado
+                        if not carro.DriveSeat.Occupant then
+                            menorDistancia = distancia
+                            carroMaisProximo = carro
+                        end
+                    end
+                end
+            end
+    
+            if carroMaisProximo then
+                -- Teleporta o jogador para o DriveSeat do carro mais próximo
+                player.Character.HumanoidRootPart.CFrame = carroMaisProximo.DriveSeat.CFrame
+                carroMaisProximo.DriveSeat.Disabled = false
+            else
+                print("Nenhum carro desocupado encontrado dentro de 45 blocos de distância.")
+            end
+        else
+            print("O script não funcionou porque não encontrou as partes do jogador.")
+        end
+    else
+        print("O script não funcionou porque não encontrou o jogador.")
+    end
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+   Name = "Comprar USP ( Não tenho certeza: 120k )",
+   Interact = 'Click',
+   Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+    Title = 'Creditos:';
+    Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+    Duration = 10;
+})
+local args = {
+    [1] = "USP"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+   end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar PoteErva ( Não tenho certeza: 4k )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "PoteErva"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Algemas ( 60k )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Algemas"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Radio ( 10k )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Radio"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Kit Reparo ( 4k )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Kit Reparo"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Gasolina ( 260 )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Jerry Can"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Pizza ( 60 )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Pizza"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Coca-cola ( 30 )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Coca-Cola"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+Name = "Comprar Agua ( 20 )",
+Interact = 'Click',
+Callback = function()
+-- Notificação de quem fez o script
+game:GetService('StarterGui'):SetCore('SendNotification', {
+ Title = 'Creditos:';
+ Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+ Duration = 10;
+})
+local args = {
+ [1] = "Agua"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+    Name = "Comprar FAL ( 145k )",
+    Interact = 'Click',
+    Callback = function()
+ -- Notificação de quem fez o script
+ game:GetService('StarterGui'):SetCore('SendNotification', {
+     Title = 'Creditos:';
+     Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+     Duration = 10;
+ })
+ local args = {
+     [1] = "FAL"
+ }
+ 
+ game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+    Name = "Comprar HK ( 165k )",
+    Interact = 'Click',
+    Callback = function()
+ -- Notificação de quem fez o script
+ game:GetService('StarterGui'):SetCore('SendNotification', {
+     Title = 'Creditos:';
+     Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+     Duration = 10;
+ })
+ local args = {
+     [1] = "HK416"
+ }
+ 
+ game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = ComprarItens,
+    Name = "Comprar Lockpicks ( 30k )",
+    Interact = 'Click',
+    Callback = function()
+ -- Notificação de quem fez o script
+ game:GetService('StarterGui'):SetCore('SendNotification', {
+     Title = 'Creditos:';
+     Text = 'Este script foi feito por Cheese e Careca ( Pato )';
+     Duration = 10;
+ })
+ local args = {
+     [1] = "Lockpick"
+ }
+ 
+ game:GetService("ReplicatedStorage"):WaitForChild("InventarioSystem"):WaitForChild("Comprar"):FireServer(unpack(args))
+    end,
+ })
+
+ local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base1",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(3098.07, 16.0065, 3034.15)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base2",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(3698.15, 16.0065, 3163.41)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base3",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(3750.33, 16.0065, 2401.06)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base4",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(3512.95, 16.0065, 3577.62)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base5",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(2993.76, 16.0065, 3550.92)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base6",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(838.19, 28.0573, 2775.76)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base7",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(0, 42.5196, 2705.69)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
+
+local Button = Tab:CreateButton({
+    SectionParent = TeleporteBIB,
+    Name = "TP Base8",
+    Interact = 'Click',
+    Callback = function()
+-- Obtenha o serviço Players
+local Players = game:GetService("Players")
+
+-- Defina a posição final desejada
+local finalPos = Vector3.new(258.329, 68.8691, 1455.38)
+
+-- Função para teleportar o jogador
+function teleportPlayer(player, finalPos, step)
+    local direction = (finalPos - player.Character.HumanoidRootPart.Position).Unit
+    local dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+
+    while dist > step do
+        local newPos = player.Character.HumanoidRootPart.Position + direction * step
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(newPos)
+        wait(0.5) -- Adicionando um cooldown de 5 segundos
+        dist = (finalPos - player.Character.HumanoidRootPart.Position).Magnitude
+    end
+
+    -- Teleportar para a posição final
+    player.Character.HumanoidRootPart.CFrame = CFrame.new(finalPos)
+end
+
+-- Chamando a função de teleport
+for i, player in ipairs(Players:GetPlayers()) do
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        teleportPlayer(player, finalPos, 95)
+    end
+end
+    end,
+})
